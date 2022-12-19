@@ -1,3 +1,8 @@
+const config = require('../configs/baseConfig');
+const axios = require('../configs/axiosConfig');
+
 exports.getUser = (req, res) => {
-    res.send({ name: 'Augusto Barreto', email: 'barretoareias@gmail.com' });
+    axios.get(`/tweets`).then((resp) => {
+        console.log(resp);
+    });
 }

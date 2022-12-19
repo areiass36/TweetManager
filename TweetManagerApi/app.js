@@ -1,10 +1,4 @@
-require('dotenv').config();
-
-const config =
-{
-    PORT: process.env.PORT || 3000,
-    ENVIRONMENT: process.env.ENVIRONMENT || "Development"
-};
+const config = require('./configs/baseConfig');
 
 const express = require('express');
 const app = express();
