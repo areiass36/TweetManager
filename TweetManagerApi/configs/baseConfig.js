@@ -1,7 +1,5 @@
 require('dotenv').config();
 
-console.log("Base url " + process.env.TWITTER_BASE_URL);
-
 module.exports =
 {
     PORT: process.env.PORT || 3000,
@@ -11,7 +9,9 @@ module.exports =
         API_KEY: process.env.TWITTER_API_KEY,
         API_KEY_SECRET: process.env.TWITTER_API_KEY_SECRET,
         BEARER_TOKEN: process.env.TWITTER_BEARER_TOKEN,
-        USER_ACCESS_TOKEN: process.env.USER_ACCESS_TOKEN,
-        USER_ACCESS_TOKEN_SECRET: process.env.API_KEY_SECRET
+        USER_ACCESS_TOKEN: process.env.TWITTER_USER_ACCESS_TOKEN,
+        USER_ACCESS_TOKEN_SECRET: process.env.TWITTER_API_KEY_SECRET,
+        CLIENT_ID: process.env.TWITTER_CLIENT_ID,
+        CLIENT_SECRET: process.env.TWITTER_CLIENT_SECRET,
     }
 };
