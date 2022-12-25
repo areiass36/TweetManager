@@ -19,6 +19,9 @@ exports.getUser = async (req, res) => {
 }
 
 exports.deleteTweet = async (req, res) => {
+
+    axios.defaults.headers.common['Authorization'] = `OAuth `;
+
     try {
         const result = await axios.delete(`/tweets/1605885846653001728`);
         res.send(result.data);
