@@ -15,6 +15,7 @@ exports.authenticateOnTwitter = async (req, res) => {
         return res.status(400).send("Unable to retrieve user data");
 
     mongoose.connect(config.MONGO_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true });
+    const db = mongoose.connection;
 
 
     res.send("OK :)");
