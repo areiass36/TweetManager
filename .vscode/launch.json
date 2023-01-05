@@ -12,6 +12,15 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}/TweetManagerApi/app.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Run daemon",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/TweetManagerDaemon/app.js"
         }
     ]
 }

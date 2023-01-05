@@ -1,26 +1,25 @@
 const axios = require('../configs/axiosConfig');
 const config = require('../configs/baseConfig');
-const user =
 
-    exports.authenticateUser = async (userCode) => {
-        try {
-            const auth = await generateAccessToken(userCode);
-            const user = await getUserData(auth.access_token);
-            return {
-                _id: user.id,
-                username: user.username,
-                name: user.name,
-                accessToken: auth.access_token,
-                profileImageUrl: user.profile_image_url,
-                refreshToken: auth.refresh_token,
-                deletedTweetsCount: 0
-            };
-        }
-        catch (e) {
-            console.log(e);
-        }
-        return null;
+exports.authenticateUser = async (userCode) => {
+    try {
+        const auth = await generateAccessToken(userCode);
+        const user = await getUserData(auth.access_token);
+        return {
+            _id: user.id,
+            username: user.username,
+            name: user.name,
+            accessToken: auth.access_token,
+            profileImageUrl: user.profile_image_url,
+            refreshToken: auth.refresh_token,
+            deletedTweetsCount: 0
+        };
     }
+    catch (e) {
+        console.log(e);
+    }
+    return null;
+}
 
 async function generateAccessToken(code) {
     const headers = {
