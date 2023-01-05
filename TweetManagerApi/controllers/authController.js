@@ -1,7 +1,7 @@
 const config = require("../configs/baseConfig");
 const axios = require("../configs/axiosConfig");
 
-const mongoose = require('mongoose');
+const user = require('../models/user');
 
 const twitterServices = require("../services/twitterServices");
 
@@ -14,9 +14,16 @@ exports.authenticateOnTwitter = async (req, res) => {
     if (!userData)
         return res.status(400).send("Unable to retrieve user data");
 
-    mongoose.connect(config.MONGO_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true });
-    const db = mongoose.connection;
+    const hasUser = (await user.findById(userData._id)) != null;
+    if (hasUser)
+        await user.updateOne({ _id: userData._id }, userData);
+    else
+        await user.create(userData);
 
-
-    res.send("OK :)");
+    res.send({
+        _id: userData._id,
+        username: userData.username,
+        name: userData.name,
+        profileImageUrl: userData.profileImageUrl,
+    });
 };

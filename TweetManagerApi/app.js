@@ -1,6 +1,8 @@
 const config = require('./configs/baseConfig');
 const cors = require('cors');
+const mongoose = require('mongoose');
 
+mongoose.connect(config.MONGO_CONNECTION_STRING);
 const express = require('express');
 const app = express();
 
