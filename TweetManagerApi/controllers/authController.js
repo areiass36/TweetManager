@@ -8,11 +8,11 @@ const twitterServices = require("../services/twitterServices");
 exports.authenticateOnTwitter = async (req, res) => {
     const token = req.headers.authorization.split("Bearer ")[1];
     if (!token)
-        return res.status(400).send("No token was passed by");
+        return res.status(400).send({ error: "No token was passed by" });
 
     const userData = await twitterServices.authenticateUser(token);
     if (!userData)
-        return res.status(400).send("Unable to retrieve user data");
+        return res.status(400).send({ error: "Unable to retrieve user data" });
 
     const hasUser = (await user.findById(userData._id)) != null;
     if (hasUser)

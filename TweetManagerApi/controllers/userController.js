@@ -1,17 +1,33 @@
-const config = require('../configs/baseConfig');
-const axios = require('../configs/axiosConfig');
+const user = require("../models/user");
 
 exports.getUser = async (req, res) => {
+    console.log("Get user called");
+    const id = req.params.id;
+    if (!id)
+        res.status(400).send({ error: "No id was passed by" });
 
-    axios.defaults.headers.common['Authorization'] = `Bearer ${config.TWITTER.BEARER_TOKEN}`;
+    const u = await user.findOne({ _id: id });
 
-    try {
-        const result = await axios.get(`/tweets?ids=1602634446347304960`,);
-        res.send(result.data);
-        return;
-    } catch (e) {
-        res.send(e);
-        return;
-    }
+    if (!u)
+        return res.status(200).send({ error: "Id could not be found" });
 
+    res.status(200).send({
+        _id: u._id,
+        name: u.name,
+        username: u.username,
+        deletedTweetsCount: u.deletedTweetsCount,
+        profileImageUrl: u.profileImageUrl,
+    });
 }
+
+exports.deleteUser = async (req, res) => {
+    const id = req.params.id;
+
+    if (!id)
+        res.status(400).send({ error: "No id was passed by" });
+
+    console.log("Called??");
+
+    await user.deleteOne({ _id: id });
+    res.status(200).send({ deleted: true });
+};

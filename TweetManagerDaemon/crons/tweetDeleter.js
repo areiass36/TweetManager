@@ -8,6 +8,7 @@ async function tweetDeleter() {
 
         tweets.forEach(async t => {
             await twitterService.tryDeleteTweet(t, u.accessToken);
+            await user.updateOne({ _id: u._id }, { deletedTweetsCount: ++u.deletedTweetsCount });
         })
     });
 }
